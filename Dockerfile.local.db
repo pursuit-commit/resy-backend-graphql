@@ -1,0 +1,5 @@
+FROM postgres:latest
+COPY src/db/init-schema.sql /docker-entrypoint-initdb.d/
+
+# add seed data script here
+COPY src/db/seed-data.sql /docker-entrypoint-initdb.d/

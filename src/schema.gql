@@ -1,0 +1,61 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Reservation {
+  id: UUID!
+  createdAt: String!
+  firstName: String!
+  lastName: String!
+  phoneNumber: String!
+  email: String
+  time: DateTime!
+  numGuests: Int!
+  restaurantId: UUID!
+}
+
+"""A simple UUID parser"""
+scalar UUID
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type Restaurant {
+  id: UUID!
+  name: String!
+  description: String!
+  phoneNumber: String
+  openingTime: String!
+  closingTime: String!
+  price: Price!
+  cuisine: String!
+  location: String!
+  diningRestriction: DiningRestriction
+  tables: JSON
+  reservations: [Reservation!]
+}
+
+enum Price {
+  p1
+  p2
+  p3
+  p4
+}
+
+enum DiningRestriction {
+  TakeoutOnly
+  DeliveryOnly
+}
+
+"""
+The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
+"""
+scalar JSON
+
+type Query {
+  restaurant(id: UUID!): Restaurant!
+  restaurants: [Restaurant!]!
+  reservation(id: UUID!): Reservation!
+}
