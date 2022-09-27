@@ -43,7 +43,6 @@ export class RestaurantsResolver {
   @ResolveField('reservations', returns => [Reservation])
   async reservations(@Parent() restaurant: Restaurant) {
     const { id } = restaurant;
-    console.log(id)
     return this.reservationService.getReservationsByRestaurantId(id);
   }
 }
