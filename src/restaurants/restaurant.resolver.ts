@@ -23,6 +23,11 @@ export class RestaurantsResolver {
     return this.restaurantService.getRestaurants({});
   }
 
+  /**
+   * Function to add a new restaurant to the system
+   * @Input Expects a restaurant object in JSON format
+   * @Output Returns a new restaurant
+   */
   @Mutation(returns => Restaurant)
   async newRestaurant(@Args({ name: 'restaurantData', type: () => GraphQLJSON }) restaurantData: Omit<Restaurant, 'id'>) {
     return this.restaurantService.addRestaurant(restaurantData);

@@ -53,7 +53,7 @@ export class Restaurant {
     @Field(type => DiningRestriction, { nullable: true })
     diningRestriction: DiningRestriction;
 
-    @Field((type) => GraphQLJSON, { nullable: true })
+    @Field(type => GraphQLJSON, { nullable: true })
     tables?: JSON;
 
     @Field(type => [Reservation], { nullable: true })
