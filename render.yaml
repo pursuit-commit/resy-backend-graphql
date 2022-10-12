@@ -1,5 +1,5 @@
 services:  
-  api:
+  api-nest:
     build: 
       context: .
       dockerfile: Dockerfile.local.api
