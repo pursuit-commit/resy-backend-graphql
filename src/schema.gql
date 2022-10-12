@@ -2,26 +2,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type Reservation {
-  id: UUID!
-  createdAt: String!
-  firstName: String!
-  lastName: String!
-  phoneNumber: String!
-  email: String
-  time: DateTime!
-  numGuests: Int!
-  restaurantId: UUID!
-}
-
-"""A simple UUID parser"""
-scalar UUID
-
-"""
-A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
-"""
-scalar DateTime
-
 type Restaurant {
   id: UUID!
   name: String!
@@ -36,6 +16,9 @@ type Restaurant {
   tables: JSON
   reservations: [Reservation!]
 }
+
+"""A simple UUID parser"""
+scalar UUID
 
 enum Price {
   p1
@@ -54,9 +37,28 @@ The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://
 """
 scalar JSON
 
+type Reservation {
+  id: UUID!
+  createdAt: String!
+  firstName: String!
+  lastName: String!
+  phoneNumber: String!
+  email: String
+  time: DateTime!
+  numGuests: Int!
+  restaurantId: UUID!
+  restaurant: Restaurant!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
 type Query {
   restaurant(id: UUID!): Restaurant!
   restaurants: [Restaurant!]!
+  reservations: [Reservation!]!
   reservation(id: UUID!): Reservation!
 }
 
