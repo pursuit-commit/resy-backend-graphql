@@ -22,6 +22,7 @@ import { ReservationResolver } from './reservations/reservation.resolver';
         dateScalarMode: 'isoDate',
       },
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
+      playground: true,
     }),
   ],
   providers: [
