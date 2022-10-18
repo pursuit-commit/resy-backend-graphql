@@ -14,8 +14,7 @@ import { ReservationResolver } from './reservations/reservation.resolver';
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       cors: {
-        origin: 'http://localhost:3006',
-        credentials: true,
+        origin: '*'
       },
       resolvers: { UUID: CustomUuidScalar, JSON: GraphQLJSON },
       buildSchemaOptions: {
