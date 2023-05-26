@@ -18,12 +18,18 @@ CREATE TABLE IF NOT EXISTS "Restaurants" (
 CREATE TABLE IF NOT EXISTS "Reservations" (
     "id" uuid PRIMARY KEY DEFAULT gen_random_uuid(),
     "createdAt" TIMESTAMP DEFAULT NOW(),
-    "firstName" text NOT NULL,
-    "lastName" text NOT NULL,
+    "name" text NOT NULL, 
     "phoneNumber" varchar(255) NOT NULL,
     "email" varchar(255),
     "time" TIMESTAMP NOT NULL,
     "numGuests" int NOT NULL,
     "restaurantId" uuid NOT NULL REFERENCES "Restaurants" (id) ON DELETE CASCADE 
 ); 
+
+CREATE TABLE IF NOT EXISTS "Users" (
+    "id" uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+    "name" text NOT NULL,
+    "username" text NOT NULL,
+    "passwordHash" text NOT NULL
+);
 

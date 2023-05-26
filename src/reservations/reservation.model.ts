@@ -1,6 +1,8 @@
 import { ObjectType, Field, Int } from "@nestjs/graphql";
-import { Restaurant } from "src/restaurants/models/restaurant.model";
+import { Restaurant } from "src/restaurants/restaurant.model";
 import { CustomUuidScalar } from "src/utils/custom";
+
+export type ReservationDTO = Omit<Reservation, 'id' | 'createdAt' | 'restaurant'>;
 
 @ObjectType()
 export class Reservation {
@@ -11,10 +13,7 @@ export class Reservation {
     createdAt: string;
 
     @Field()
-    firstName: string;
-
-    @Field()
-    lastName: string;
+    name: string;
 
     @Field()
     phoneNumber: string;

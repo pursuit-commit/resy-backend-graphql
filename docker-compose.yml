@@ -6,6 +6,8 @@ services:
       target: development
     image: resy-takehome-graphql
     command: npm run start
+    secrets:
+      - app_cert_key
     ports: 
       - 3000:3000
     links: 
@@ -25,3 +27,6 @@ services:
       POSTGRES_DB: postgres
       POSTGRES_USER: pursuit
       POSTGRES_PASSWORD: pursuit2022
+secrets:
+  app_cert_key:
+    file: app_secret.pem

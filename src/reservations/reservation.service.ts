@@ -2,14 +2,14 @@
 
 import { Injectable } from "@nestjs/common";
 import { pgKnex } from "../configs/db.config";
-import { Reservation } from "../reservations/models/reservation.model";
+import { Reservation, ReservationDTO } from "./reservation.model";
 
 @Injectable()
 export class ReservationService {
     constructor() { }
 
     // returns the newly created Reservation
-    makeReservation = async (input: Omit<Reservation, 'id'>): Promise<Reservation> => {
+    makeReservation = async (input: ReservationDTO): Promise<Reservation> => {
         try {
             const [newReservation] = await pgKnex<Reservation>('Reservations').insert(input, '*');
 

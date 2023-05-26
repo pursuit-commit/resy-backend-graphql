@@ -9,9 +9,9 @@ INSERT INTO "Restaurants" ("name", "description", "phoneNumber", "openingTime", 
     ('Roberta''s Pizza', 'French restaurant with beautfiul desserts in a cozy setting. This restaurant''s french cuisine brings Paris right to your city.', CAST(1000000000 + floor(random() * 9000000000) AS bigint), '10:00:00', '22:00:00', 'Pizza', '$$', 'New York City', '{"twoPersonTables":5, "fourPersonTables":5, "eightPersonTables":5}'::jsonb);
 
 
-INSERT INTO "Reservations" ("restaurantId", "firstName", "lastName", "phoneNumber", "time", "numGuests")
-    SELECT "id", 'Billy', 'Taggart', CAST(1000000000 + floor(random() * 9000000000) AS bigint), '2022-05-11 18:00:00', 4
+INSERT INTO "Reservations" ("restaurantId", "name", "phoneNumber", "time", "numGuests")
+    SELECT "id", 'Billy Taggart', CAST(1000000000 + floor(random() * 9000000000) AS bigint), '2022-05-11 18:00:00', 4
     FROM "Restaurants" FETCH FIRST ROW ONLY;
-INSERT INTO "Reservations" ("restaurantId", "firstName", "lastName", "phoneNumber", "time", "numGuests")
-    SELECT "id", 'Will', 'Kenney', CAST(1000000000 + floor(random() * 9000000000) AS bigint), '2022-05-12 19:00:00', 2
+INSERT INTO "Reservations" ("restaurantId", "name", "phoneNumber", "time", "numGuests")
+    SELECT "id", 'Will Kenney', CAST(1000000000 + floor(random() * 9000000000) AS bigint), '2022-05-12 19:00:00', 2
     FROM "Restaurants" FETCH FIRST ROW ONLY;

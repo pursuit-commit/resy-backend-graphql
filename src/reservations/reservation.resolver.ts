@@ -1,12 +1,15 @@
 import { Args, Mutation, Parent, Query, ResolveField, Resolver } from "@nestjs/graphql";
 import GraphQLJSON from "graphql-type-json";
-import { Restaurant } from "src/restaurants/models/restaurant.model";
-import { RestaurantService } from "src/services/restaurant.service";
-import { ReservationService } from "../services/reservation.service";
+import { Restaurant } from "src/restaurants/restaurant.model";
+import { RestaurantService } from "src/restaurants/restaurant.service";
+import { ReservationService } from "./reservation.service";
 import { CustomUuidScalar } from "../utils/custom";
-import { Reservation } from "./models/reservation.model";
+import { Reservation, ReservationDTO } from "./reservation.model";
+import { UseGuards } from "@nestjs/common";
+import { JwtAuthGuard } from "src/auth/auth.guard";
 
 @Resolver(of => Reservation)
+@UseGuards(JwtAuthGuard)
 export class ReservationResolver {
   constructor(
     private reservationService: ReservationService,
@@ -24,7 +27,7 @@ export class ReservationResolver {
   }
 
   @Mutation(returns => Reservation)
-  async newReservation(@Args('reservationData', { type: () => GraphQLJSON }) reservationData: Omit<Reservation, 'id'>) {
+  async newReservation(@Args('reservationData', { type: () => GraphQLJSON }) reservationData: ReservationDTO) {
     return this.reservationService.makeReservation(reservationData);
   }
 

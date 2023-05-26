@@ -1,7 +1,7 @@
 // Contains all direct interactions with the Restaurant Model
 import { RestaurantSearchFilters } from "../utils/types";
 import { pgKnex } from "../configs/db.config";
-import { Restaurant } from '../restaurants/models/restaurant.model';
+import { Restaurant } from './restaurant.model';
 import { Injectable } from "@nestjs/common";
 
 @Injectable()

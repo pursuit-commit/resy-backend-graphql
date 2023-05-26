@@ -40,8 +40,7 @@ scalar JSON
 type Reservation {
   id: UUID!
   createdAt: String!
-  firstName: String!
-  lastName: String!
+  name: String!
   phoneNumber: String!
   email: String
   time: DateTime!

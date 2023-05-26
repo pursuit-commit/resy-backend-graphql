@@ -1,7 +1,7 @@
 import { Field, Int, ObjectType, registerEnumType } from '@nestjs/graphql';
 import GraphQLJSON from 'graphql-type-json';
-import { CustomUuidScalar } from '../../utils/custom';
-import { Reservation } from '../../reservations/models/reservation.model';
+import { CustomUuidScalar } from '../utils/custom';
+import { Reservation } from '../reservations/reservation.model';
 
 export enum Price {
     p1 = '$',
