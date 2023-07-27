@@ -10,12 +10,15 @@ export class UserService {
   constructor(
     private jwtService: JwtService
   ) { }
-
+    
   async findById(id: string) {
     try {
       return await pgKnex<User>('Users')
-        .first('*')
-        .where({ id });
+        .leftJoin('UserRoles', 'UserRoles.userId', 'Users.id')
+        .first('Users.id', 'Users.name', 'Users.username', pgKnex.raw('JSON_AGG("UserRoles".role) as roles'))
+        .where({ 'Users.id': id })
+        .groupBy('Users.id', 'UserRoles.userId');
+
     } catch (err) {
       console.error(err);
       throw new Error(`Can't find User by Id...`);
@@ -24,8 +27,10 @@ export class UserService {
   async findByUsername(username: string) {
     try {
       return await pgKnex<User>('Users')
-        .first('*')
-        .where({ username });
+        .leftJoin('UserRoles', 'UserRoles.userId', 'Users.id')
+        .first('Users.*', pgKnex.raw('JSON_AGG("UserRoles".role) as roles'))
+        .where({ 'Users.username': username })
+        .groupBy('Users.id', 'UserRoles.userId');
     } catch (err) {
       console.error(err);
       throw new Error(`Can't find User by username...`);
@@ -42,7 +47,7 @@ export class UserService {
         passwordHash,
         ...userData
       })
-      .returning(['id', 'name', 'username']);
+        .returning(['id', 'name', 'username']);
 
       await trx.commit();
 
