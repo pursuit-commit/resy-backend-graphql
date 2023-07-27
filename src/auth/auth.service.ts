@@ -13,9 +13,8 @@ export class AuthService {
     private readonly jwtService: JwtService
   ) { }
 
-  async validateUser(payload: JwtPayload): Promise<User> {
+  async validateUser(payload: JwtPayload): Promise<Omit<User, 'passwordHash'>> {
     // Example implementation
-    console.log(payload);
     const userId = payload.id; // Assuming the payload contains a "sub" field for the user ID
 
     // Implement your own logic to fetch and validate the user
@@ -28,7 +27,7 @@ export class AuthService {
       const user = await this.userService.findByUsername(username);
 
       if (!user) {
-        throw new UnauthorizedException();
+        throw new UnauthorizedException(); // TODO: user doesn't exist error
       }
 
       const { passwordHash, ...userWithoutPassword } = user;

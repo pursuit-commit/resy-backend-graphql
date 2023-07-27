@@ -12,6 +12,9 @@ export class Reservation {
     @Field()
     createdAt: string;
 
+    @Field(type => CustomUuidScalar, { nullable: true })
+    createdBy?: string;
+
     @Field()
     name: string;
 
