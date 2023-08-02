@@ -31,11 +31,28 @@ export class ReservationService {
     }
 
     // returns list of Reservations based on query input
-    getReservations = async (input: any): Promise<Reservation[]> => {
+    getReservations = async (filters: { [key: string]: any }): Promise<Reservation[]> => {
         try {
-            // currently get All Reservations
             // TODO: add filters
-            return await pgKnex<Reservation>('Reservations').select('*');
+            return await pgKnex<Reservation>('Reservations').select('*')
+                .where((builder) => {
+                    if (filters.restaurantId) {
+                        builder.where({ restaurantId: filters.restaurantId })
+                    }
+
+                    // adding filters to whereBuilder
+                    if (filters) {
+                        Object.entries(filters).forEach(([key, value]) => {
+                            if (Array.isArray(value)) {
+                                builder.andWhere(key, 'in', value)
+                            } else {
+                                builder.andWhere(key, value)
+                            }
+                        })
+                    }
+
+                    return builder;
+                });
         } catch (err) {
             console.error(err);
             throw new Error(`Get Reservations failed -- ${err.message}`);
