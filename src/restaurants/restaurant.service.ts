@@ -16,7 +16,10 @@ export class RestaurantService {
             // Question: What type of eviction policy do we think would be best in this situation
     
             
-            const [newRestaurant] = await pgKnex<Restaurant>('Restaurants').insert({ ...input, diningRestriction: (input.diningRestriction as any) === '' ? null : input.diningRestriction }).returning('*');
+            const [newRestaurant] = await pgKnex<Restaurant>('Restaurants').insert({
+                 ...input, 
+                 diningRestriction: (input.diningRestriction as any) === '' ? null : input.diningRestriction 
+            }).returning('*');
     
             return newRestaurant;
         } catch (err) {
@@ -50,7 +53,10 @@ export class RestaurantService {
                 .where((builder) => {
                     // searchTerm filter
                     if (searchTerm) {
-                        builder.whereILike('name', `%${searchTerm}%`).orWhereILike('description', `%${searchTerm}%`)
+                        builder.whereILike('name', `%${searchTerm}%`)
+                            .orWhereILike('description', `%${searchTerm}%`)
+                            .orWhereILike('cuisine', `%${searchTerm}%`)
+                            .orWhereILike('location', `%${searchTerm}%`)
                     }
                     
                     // adding filters to whereBuilder

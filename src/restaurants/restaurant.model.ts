@@ -51,11 +51,11 @@ export class Restaurant {
     location: string;
 
     @Field(type => DiningRestriction, { nullable: true })
-    diningRestriction: DiningRestriction;
+    diningRestriction: DiningRestriction | undefined;
 
     @Field(type => GraphQLJSON, { nullable: true })
-    tables?: JSON;
+    tables?: JSON | undefined;
 
     @Field(type => [Reservation], { nullable: true })
-    reservations?: Reservation[];
+    reservations?: Reservation[] | undefined;
 }
