@@ -42,7 +42,7 @@ export class RestaurantsResolver {
   @Mutation(returns => Restaurant)
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles(Role.ADMIN, Role.OWNER)
-  // app.post('/restaurants', async (req, res) => {
+  // app.post('/restaurants', (req, res) => {
   async newRestaurant(@Args({ name: 'restaurantData', type: () => GraphQLJSON }) restaurantData: Omit<Restaurant, 'id'>) {
     return this.restaurantService.addRestaurant(restaurantData);
   }
