@@ -20,6 +20,7 @@ export class ReservationResolver {
   async reservations() {
     return this.reservationService.getReservations({});
   }
+  // testing
 
   @Query(returns => Reservation)
   async reservation(@Args('id', { type: () => CustomUuidScalar }) id: string) {
