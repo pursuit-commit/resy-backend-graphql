@@ -18,7 +18,6 @@ export class RestaurantsResolver {
   ) { }
 
   @Query(returns => Restaurant)
-  // app.get('/restaurants/:id', async (req, res) => {
   async restaurant(@Args('id', { type: () => CustomUuidScalar }) id: string) {
     const restaurant = await this.restaurantService.getRestaurantById(id);
 
@@ -34,15 +33,9 @@ export class RestaurantsResolver {
     return this.restaurantService.getRestaurants({});
   }
 
-  /**
-   * Function to add a new restaurant to the system
-   * @Input Expects a restaurant object in JSON format
-   * @Output Returns a new restaurant
-   */
   @Mutation(returns => Restaurant)
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles(Role.ADMIN, Role.OWNER)
-  // app.post('/restaurants', (req, res) => {
   async newRestaurant(@Args({ name: 'restaurantData', type: () => GraphQLJSON }) restaurantData: Omit<Restaurant, 'id'>) {
     return this.restaurantService.addRestaurant(restaurantData);
   }
